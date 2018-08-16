@@ -9,12 +9,11 @@ namespace Web.Controllers
 {
     using System.Web.Mvc;
     using Infrastructure;
-    using Models;
 
     public class OrderController : ApiController
     {
         [HttpGet]
-        public IEnumerable<Order> GetOrders(int id = 1)
+        public IEnumerable<Models.Old.Order> GetOrders(int id = 1)
         {
             var data = new OrderService();
 
