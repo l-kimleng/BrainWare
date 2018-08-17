@@ -2,15 +2,15 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
-using Web.Models.Old;
 
 namespace Web.Infrastructure
 {
     using System.Data;
+    using Models;
 
     public class OrderService
     {
-        public List<Models.Old.Order> GetOrdersForCompany(int CompanyId)
+        public List<Order> GetOrdersForCompany(int CompanyId)
         {
 
             var database = new Database();
@@ -21,13 +21,13 @@ namespace Web.Infrastructure
 
             var reader1 = database.ExecuteReader(sql1);
 
-            var values = new List<Models.Old.Order>();
+            var values = new List<Order>();
             
             while (reader1.Read())
             {
                 var record1 = (IDataRecord) reader1;
 
-                values.Add(new Models.Old.Order()
+                values.Add(new Order()
                 {
                     CompanyName = record1.GetString(0),
                     Description = record1.GetString(1),
@@ -57,7 +57,7 @@ namespace Web.Infrastructure
                     ProductId = record2.GetInt32(2),
                     Price = record2.GetDecimal(0),
                     Quantity = record2.GetInt32(3),
-                    Product = new Models.Old.Product()
+                    Product = new Product()
                     {
                         Name = record2.GetString(4),
                         Price = record2.GetDecimal(5)

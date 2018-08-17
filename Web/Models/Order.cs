@@ -1,34 +1,45 @@
+﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
+using System.Linq;
+using System.Web;
 
 namespace Web.Models
 {
-    [Table("Order")]
-    public partial class Order
+    using System.Security.AccessControl;
+
+    public class Order
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Order()
-        {
-            OrderProducts = new HashSet<OrderProduct>();
-        }
+        public int OrderId { get; set; }
 
-        [Key]
-        [Column("order_id")]
-        public int Id { get; set; }
+        public string CompanyName { get; set; }
 
-        [Required]
-        [StringLength(1000)]
-        [Column("description")]
         public string Description { get; set; }
 
-        public int CompanyId { get; set; }
-        public Company Company { get; set; }
-
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public ICollection<OrderProduct> OrderProducts { get; set; }
-
-        [NotMapped]
         public decimal OrderTotal { get; set; }
+
+        public List<OrderProduct> OrderProducts { get; set; }
+
+    }
+
+
+    public class OrderProduct
+    {
+        public int OrderId { get; set; }
+
+        public int ProductId { get; set; }
+
+        public Product Product { get; set; }
+    
+        public int Quantity { get; set; }
+
+        public decimal Price { get; set; }
+
+    }
+
+    public class Product
+    {
+        public string Name { get; set; }
+
+        public decimal Price { get; set; }
     }
 }
