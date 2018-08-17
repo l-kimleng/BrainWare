@@ -3,15 +3,17 @@ var OrderController = function (orderService) {
 
     var renderOrders = function (data) {
         var $orders = $('#orders');
-        var $orderList = $('<ul/>');
+        var $orderList = $('<div/>');
 
         if (data) {
             $.each(data,
                 function () {
-                    var $li = $('<li/>').text(this.description + ' (Total: $' + this.orderTotal + ')')
+                    var $div = $('<div/>').addClass('panel panel-default')
+                        .append($('<div/>').addClass('panel-heading lead')
+                            .text(this.description + ' (Total: $' + this.orderTotal + ')'))
                         .appendTo($orderList);
 
-                    var $productList = $('<ul/>');
+                    var $productList = $('<ul/>').addClass('list-group');
 
                     $.each(this.orderProducts,
                         function () {
@@ -20,11 +22,12 @@ var OrderController = function (orderService) {
                                     this.quantity +
                                     ' @@ $' +
                                     this.price +
-                                    '/ea)')
+                                '/ea)')
+                                .addClass('list-group-item')
                                 .appendTo($productList);
                         });
 
-                    $productList.appendTo($li);
+                    $productList.appendTo($div);
                 });
 
             $orders.append($orderList);
