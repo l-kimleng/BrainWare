@@ -11,34 +11,6 @@
 </div>
 <script>
     $(document).ready(function () {
-        var $orders = $('#orders');
-        $.ajax({
-            'url': '/api/orders/1',
-            'type': 'GET',
-            'success': function (data) {
-
-                var $orderList = $('<ul/>');
-
-                if (data) {
-                    $.each(data,
-                        function(i) {
-                            var $li = $('<li/>').text(this.description + ' (Total: $' + this.orderTotal + ')')
-                                .appendTo($orderList);
-
-                            var $productList = $('<ul/>');
-
-                            $.each(this.orderProducts, function(j) {
-                                var $li2 = $('<li/>').text(this.productName + ' ('+ this.quantity +' @@ $' + this.price + '/ea)')
-                                    .appendTo($productList);
-                            });
-
-                            $productList.appendTo($li);
-                        });
-
-                    $orders.append($orderList);
-                }
-            }
-        });
+        OrderController.init();
     });
 </script>
-
