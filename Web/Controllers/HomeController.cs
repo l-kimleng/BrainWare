@@ -13,38 +13,9 @@ namespace Web.Controllers
 
     public class HomeController : Controller
     {
-        private BrainWareDbContext Context { get; set; }
-
-        public HomeController()
-        {
-            Context = BrainWareDbContext.Create();
-        }
-
         public ActionResult Index()
         {
-            var orders = OrderRepository.GetOrdersBy(1);
             return View();
-        }
-
-
-        protected override void Dispose(bool disposing)
-        {
-            Context.Dispose();
-            base.Dispose(disposing);
-        }
-
-        private IOrderRepository _orderRepository;
-
-        public IOrderRepository OrderRepository
-        {
-            get
-            {
-                if (_orderRepository == null)
-                {
-                    return _orderRepository = new OrderRepository(Context);
-                }
-                return _orderRepository;
-            }
         }
 
         

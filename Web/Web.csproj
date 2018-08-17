@@ -179,8 +179,10 @@
       <DependentUpon>201808170128272_FixMapTableColumnClassProperty.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Models\Dtos\OrderDto.cs" />
+    <Compile Include="Models\Dtos\OrderProductDto.cs" />
     <Compile Include="Persistences\BrainWareDbContext.cs" />
-    <Compile Include="Controllers\API\OrderController.cs" />
+    <Compile Include="Controllers\API\OrdersController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
