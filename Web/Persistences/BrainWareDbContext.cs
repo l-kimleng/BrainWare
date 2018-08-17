@@ -10,6 +10,11 @@ namespace Web.Persistences
         {
         }
 
+        public static BrainWareDbContext Create()
+        {
+            return new BrainWareDbContext();
+        }
+
         public virtual DbSet<Company> Companies { get; set; }
         public virtual DbSet<Order> Orders { get; set; }
         public virtual DbSet<OrderProduct> OrderProducts { get; set; }

@@ -192,6 +192,8 @@
     <Compile Include="Models\Order.cs" />
     <Compile Include="Models\OrderProduct.cs" />
     <Compile Include="Models\Product.cs" />
+    <Compile Include="Persistences\Repositories\IOrderRepository.cs" />
+    <Compile Include="Persistences\Repositories\OrderRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
