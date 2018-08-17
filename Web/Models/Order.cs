@@ -1,45 +1,39 @@
-﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Web.Models
 {
-    using System.Security.AccessControl;
-
-    public class Order
+    [Table("Order")]
+    public partial class Order
     {
-        public int OrderId { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Order()
+        {
+            OrderProducts = new HashSet<OrderProduct>();
+        }
 
-        public string CompanyName { get; set; }
+        [Key]
+        [Column("order_id")]
+        public int Id { get; set; }
 
+        [Required]
+        [StringLength(1000)]
+        [Column("description")]
         public string Description { get; set; }
 
+
+        [Column("company_id")]
+        public int CompanyId { get; set; }
+
+        [ForeignKey(nameof(CompanyId))]
+        public Company Company { get; set; }
+
+        [Column(TypeName = "money")]
+        [NotMapped]
         public decimal OrderTotal { get; set; }
 
-        public List<OrderProduct> OrderProducts { get; set; }
-
-    }
-
-
-    public class OrderProduct
-    {
-        public int OrderId { get; set; }
-
-        public int ProductId { get; set; }
-
-        public Product Product { get; set; }
-    
-        public int Quantity { get; set; }
-
-        public decimal Price { get; set; }
-
-    }
-
-    public class Product
-    {
-        public string Name { get; set; }
-
-        public decimal Price { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public ICollection<OrderProduct> OrderProducts { get; set; }
     }
 }
