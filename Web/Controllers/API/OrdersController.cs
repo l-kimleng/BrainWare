@@ -41,7 +41,8 @@ namespace Web.Controllers.API
             if (orders.Count == 0)
                 return NotFound();
 
-            return Ok(MapDto(orders));
+            var result = MapDto(orders);    
+            return Ok(result);
         }
 
         // This can replace by auto mapper
@@ -53,11 +54,11 @@ namespace Web.Controllers.API
                 OrderTotal = x.OrderTotal,
                 OrderProducts = x.OrderProducts.Select(y => new OrderProductDto
                 {
-                    Price = y.Product.Price ?? 0.0m,
+                    Price = y.Price,
                     Quantity = y.Quantity,
                     ProductName = y.Product.Name
                 }).ToArray()
-
+                
             }).ToArray();
         }
 
